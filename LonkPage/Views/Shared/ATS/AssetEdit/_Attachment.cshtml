@@ -1,0 +1,51 @@
+﻿@model ATS.Models.Models.ViewModel.PartialView.AttachmentCreateVm
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="background-color: lightgreen">
+            <h3 class="panel-title">Attachment</h3>
+        </div>
+        <div class="panel-body">
+            <!--Form Start-->
+            @using (Html.BeginForm("Upload", "AssetEntries", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                <div class="col-md-12 col-sm-12 ">
+                    <fieldset>
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                        <!-- Form Name -->
+                        <!-- Text input-->
+
+                            <div id="successMessageAttachment" class="text-center"></div>
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 form-group">
+                                    @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="File" id="fileUpload" multiple />
+                                        @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-offset-6 col-md-2 col-sm-offset-6 col-sm-2">
+                                    <input type="button" value="Upload" id="saveButtonAttachment" name="saveButtonAttachment" class="btn btn-success" disabled="disabled" />
+                                </div>
+                            </div><!-- row end-->
+</fieldset>
+                </div>
+            }
+            <!--Form End-->
+        </div>
+    </div>
+
+
+
+
+<script src="~/Scripts/ATS/Partial.js"></script>

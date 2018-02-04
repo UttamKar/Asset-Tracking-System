@@ -1,0 +1,209 @@
+﻿@model ATS.Models.Models.ViewModel.AssetEntry.AssetEntryEditVm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Asset Entry</h3>
+        </div>
+        <div class="panel-body">
+            <!--Form Start-->
+            @using (Html.BeginForm("Create", "AssetEntries", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                <div class="col-md-12 col-sm-12 ">
+                    <fieldset>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <!-- Form Name -->
+                        <!-- Text input-->
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.OrganizationId, "Organization", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.OrganizationLookUp, "Value", "Text"), new { id = "OrganizationAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.OrganizationId, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.BranchId, "Branch", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.BranchLookUp, "Value", "Text"), new { id = "BranchAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.LocationId, new SelectList(Model.LocationLookUp, "Value", "Text"), new { id = "LocationAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.DescriptionName, "Description/Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.DescriptionName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DescriptionName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.AssetTypeId, "Asset Type", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.AssetTypeId, new SelectList(Model.AssetTypeLookUp, "Value", "Text"), new { id = "AssetTypeAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.AssetTypeId, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.AssetGroupId, "Asset Group", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.AssetGroupId, new SelectList(Model.AssetGroupLookUp, "Value", "Text"), new { id = "AssetGroupAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.AssetGroupId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.ManufacturerId, "Manufacturer", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.ManufacturerId, new SelectList(Model.ManufacturerLookUp, "Value", "Text"), new { id = "ManufacturerAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ManufacturerId, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.AssetModelId, "Asset Model", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.AssetModelId, new SelectList(Model.AssetModelLookUp, "Value", "Text"), new { id = "ModelAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.AssetModelId, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div><!-- row end-->
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.Brand, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.Status, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownList("Status", new List<SelectListItem>
+                                    {
+                                        new SelectListItem() {Text = "New", Value = "1"},
+                                        new SelectListItem() {Text = "Check In", Value = "2"},
+                                        new SelectListItem() {Text = "Check Out", Value = "3"}
+                                    }, "Select Status", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div><!-- row end-->
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.SerialNo, "Serial No", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.SerialNo, new { id = "serialNoAssetEntry", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4 col-sm-4">
+                                    <input type="file" name="Attachment" />
+                                    @Html.ValidationMessageFor(model => model.Attachment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+                        <hr />
+                        <!-- Button -->
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="form-group">
+                                <div class="col-md-11 col-sm-11" align="right">
+                                    <input type="submit" id="Save" name="Save" class="btn btn-success" value="Update" />
+                                    @Html.ActionLink("Cancel", "Create", "AssetEntries", new { @class = "btn btn-danger" })
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+                        
+                    </fieldset>
+                </div>
+            }
+
+
+            <!--For Bootstrap alart-->
+            <div class="row">
+                <div id="alert" class="col-md-6 col-md-offset-3 form-group">
+                    <div style="padding: 5px;">
+                        <div id="inner-message" class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>To add more information please click on below Tab</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Form End-->
+            @**********************Tab**********************@
+
+            <ul class="nav nav-tabs">
+                <li id="financeTab"><a data-toggle="tab" href="#Finance">Finance</a></li>
+                <li id="serviceTab"><a data-toggle="tab" href="#Service">Service</a></li>
+                <li id="attachmentTab"><a data-toggle="tab" href="#Attachment">Attachment</a></li>
+                <li id="notesTab"><a data-toggle="tab" href="#Notes">Notes</a></li>
+                <li id="historyTab"><a data-toggle="tab" href="#History">History</a></li>
+
+            </ul>
+
+
+            @********************Tab Partial***********************@
+
+
+            <div class="tab-content" >
+                <div id="assetEditPartialDiv"></div>
+            </div>
+        </div>
+
+
+        <div>
+            &nbsp;&nbsp; @Html.ActionLink("Back to Asset List", "Index")
+        </div>
+        <br/>
+
+        </div>
+    </div>
+
+    
+
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#alert').hide('fade');
+            },6000);
+        });
+    </script>
+
+    <script src="~/Scripts/ATS/AssetEdit.js"></script>
+    <script src="~/Scripts/ATS/DD.js"></script>
+    <script src="~/Scripts/ATS/ShortCodeGeneration.js"></script>
+}
+
+

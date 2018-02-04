@@ -1,0 +1,207 @@
+﻿@model ATS.Models.Models.ViewModel.Employee.EmployeeSearchVm
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Employee Search</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-12 form-group">
+                                    @Html.LabelFor(model => model.Branch.OrganizationId, "Organization", htmlAttributes: new { @class = "control-label col-md-3 col-sm-3" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.OrganizationLookUp, "Value", "Text"), new { id = "OrganizationAssetEntry", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Branch.OrganizationId, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.BranchId, "Branch", new { @class = "control-label col-md-2 col-sm-2" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.BranchLookUp, "Value", "Text"), new { id = "BranchAssetEntry", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-12 form-group">
+                                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.TextBoxFor(model => model.FirstName, new { id = "firstNameEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.TextBoxFor(model => model.LastName, new { id = "lasttNameEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-12 form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-12 form-group">
+                                   @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3" })
+                                    <div class="col-md-3 col-sm-3">
+                                        @Html.TextBoxFor(model => model.Code, new { id = "codeEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            
+                            <hr />
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="form-group">
+                                    <div class="col-md-11 col-sm-11" align="right">
+                                        <input type="submit" id="Search" name="Search" class="btn btn-info" value="Search" />
+                                        @Html.ActionLink("Cancel", "Search", "Employees", new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <hr />
+
+
+                            <div class="container-fluid">
+
+                                <div class="panel panel-default">
+                                    <div class="panel panel-heading">Employee List</div>
+                                    <div class="panel-body">
+                                        <div align="right">
+                                            @Html.ActionLink("Show All", "Index", "Employees", new { @class = "btn btn-info btn-sm" })
+                                            @Html.ActionLink("Create New", "Create", "Employees", new { @class = "btn btn-success btn-sm" })
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            <table class="table table-striped table-hover table-bordered text-center">
+                                                <tr style="background-color: lightgreen; color: white">
+                                                    <th>#</th>
+                                                    <th>
+                                                        Organization Name
+                                                    </th>
+                                                    <th>
+                                                        Branch Name
+                                                    </th>
+                                                    <th>
+                                                        First Name
+                                                    </th>
+                                                    <th>
+                                                        Last Name
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Email)
+                                                    </th>
+                                                    <th>
+                                                        Contact No.
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Code)
+                                                    </th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                @{
+                                                    var serialNo = 0;
+                                                }
+                                                @if (Model.Employees != null && Model.Employees.Any())
+                                                {
+
+                                                    foreach (var item in Model.Employees)
+                                                    {
+                                                        <tr>
+                                                            <td>@(++serialNo)</td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Branch.Organization.Name)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Branch.Name)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.FirstName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.LastName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Email)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ContactNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Code)
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink("Edit", "Edit", "Employees", new { id = item.Id }, new { @class = "btn btn-success btn-xs" }) 
+                                                                @Html.ActionLink("Details", "Details", "Employees", new { id = item.Id }, new { @class = "btn btn-info btn-xs" }) 
+                                                                @Html.ActionLink("Delete", "Delete", "Employees", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                    <!--Form End-->
+
+                                                    }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $("#BranchAssetEntry").empty();
+    </script>
+    <script src="~/Scripts/ATS/DD.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.Partial.AssetDetails>
+
+@{
+    ViewBag.Title = "_History";
+}
+
+
+
+    <div>
+        <table class="table table-striped table-hover table-bordered text-center">
+            <tr style="background-color: lightgreen; color: white">
+                <th>#</th>
+                <th>
+                    Asset Id
+                </th>
+                <th>
+                    Serial No.
+                </th>
+                <th>
+                    Description/Name
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Employee Id
+                </th>
+            </tr>
+            @{
+                var serialNo = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(++serialNo)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssetEntryId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SerialNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescriptionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
+
+
+
+
+
+

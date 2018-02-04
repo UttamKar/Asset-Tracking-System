@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.AssetType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">Asset Type List</div>
+        <div class="panel-body">
+            <div align="right">
+                @Html.ActionLink("Search", "Search", "AssetTypes", new { @class = "btn btn-info" })
+                @Html.ActionLink("Create New", "Create", "AssetTypes", new {@class = "btn btn-success"})
+            </div>
+            <hr />
+            <div>
+                <table class="table table-striped table-hover table-bordered text-center">
+                    <tr style="background-color: lightgreen; color: white">
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Short Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    @{
+                        var serialNo = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(++serialNo)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShortName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "AssetTypes", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Details", "Details", "AssetTypes", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                @Html.ActionLink("Delete", "Delete", "AssetTypes", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

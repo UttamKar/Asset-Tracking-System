@@ -1,0 +1,161 @@
+﻿@model ATS.Models.Models.ViewModel.CheckOut.CheckOutCreateVm
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Check Out</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+
+
+                                <!-- Form Name -->
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EmployeeId, "Employee Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.DropDownList("EmployeeId", new SelectList(Model.EmployeeLookUp, "Value", "Text"), htmlAttributes: new { id="empIdCheckOut", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EmployeeNo, "Employee No", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.TextBoxFor(model => model.EmployeeNo, new { id = "empNumberCheckOut", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.EmployeeNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EntryDate, "Entry Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.TextBoxFor(model => model.EntryDate, @DateTime.Now.ToShortDateString(), new { @readonly = "readonly",  @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.EntryDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DueDate, "Due Date", htmlAttributes: new { @class = "control-label col-md-4"})
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.TextBox("DueDate","", new { @class = "form-control", @placeholder = "Select Due Date" })
+                                        @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CheckOutFor, "CheckOut For", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.DropDownList("CheckOutFor", new List<SelectListItem>
+                                            {
+                                                new SelectListItem() {Text = "New Employee", Value = "New Employee"},
+                                                new SelectListItem() {Text = "Existing Employee", Value = "Existing Employee"}
+                                            }, "Select Employee Category", htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CheckOutFor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.DropDownList("LocationId", new SelectList(Model.LocationLookUp, "Value", "Text"), new { @class = "form-control" })
+                                        @*<span class="input-group-btn">
+                                            <button class="btn btn-primary" id="locationButton" data-dropdownid="LocationId" data-url="@Url.Action("Create", "CheckOuts")" data-toggle="modal" data-target="#locationButton" type="button"><span class="glyphicon glyphicon glyphicon-plus-sign"></span></button>
+                                        </span>*@
+                                        @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div id="locationDiv"></div>
+
+
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8 col-sm-8">
+                                        @Html.TextAreaFor(model => model.Comments, new { @class = "form-control"})
+                                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AssetEntryId, "Asset Name", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6 col-sm-6">
+                                        @Html.DropDownList("AssetEntryId", new SelectList(Model.AssetEntryLookUp, "Value", "Text"), new { id = "assetName", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.AssetEntryId, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <input type="button" value="Add" id="addBtn" name="add" class="btn btn-info" />
+                                    </div>
+                                </div>
+
+                                @Html.HiddenFor(model => model.AssetNo, new { @class = "form-control" })
+
+                                <br /><br />
+                                <div class="form-group">
+                                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
+                                        <table class="table table-scroll table-striped">
+                                            <thead style="background-color: lightgreen">
+                                                <tr style="color: white">
+                                                    <th>#</th>
+                                                    <th>Asset No</th>
+                                                    <th>Asset Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="assetTable"></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <hr/>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12" align="right">
+                                        <button id="Save" name="Save" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                        @Html.ActionLink("Cancel", "Create", "CheckOut", new { @class = "btn btn-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+    <!--Form End-->
+                }
+
+                <div>
+                    @Html.ActionLink("Back to Check Out List", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/ATS/CheckOutAssett.js"></script>
+}
+

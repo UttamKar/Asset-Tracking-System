@@ -1,0 +1,136 @@
+﻿@model ATS.Models.Models.ViewModel.DashBoardCreateVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <p style="color: white; background: lightgreen; padding: 5px 10px;"> <marquee><b><i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-heart-o" aria-hidden="true"></i>  Welcome to Asset Tracking System!!  Total Employee: @Model.EmpCount;  Total Organization: @Model.OrgCount;  Total Vendor: @Model.VendorCount;  Total Asset: @Model.AssetCount; <i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-heart-o" aria-hidden="true"></i><i class="fa fa-heart-o" aria-hidden="true"></i></b></marquee></p>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Employee</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EmpCount, "Total Employee", htmlAttributes: new {@class = "control-label col-md-6 col-sm-6"})
+                            <div class="col-md-6 col-sm-6">
+                                @Html.DisplayFor(model => model.EmpCount, new {@class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastRegisteredEmp, "Last Registered Emp", htmlAttributes: new {@class = "control-label col-md-6 col-sm-6"})
+                            <div class="col-md-6 col-sm-6">
+                                @Html.DisplayFor(model => model.LastRegisteredEmp, new {@class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Organization</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrgCount, "Total Organization", htmlAttributes: new {@class = "control-label col-md-6 col-sm-6"})
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DisplayFor(model => model.OrgCount, new {@class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastRegisteredOrg, "Last Registered Org", htmlAttributes: new {@class = "control-label col-md-6 col-sm-6"})
+                            <div class="col-md-6 col-sm-6">
+                                @Html.DisplayFor(model => model.LastRegisteredOrg, new {@class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Asset</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AssetCount, "Total Asset", htmlAttributes: new {@class = "control-label col-md-6 col-sm-6"})
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DisplayFor(model => model.AssetCount, new {@class = "form-control"})
+                            </div>
+                        </div>
+                    </div><div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NewAssetCount, "New Asset", htmlAttributes: new { @class = "control-label col-md-6 col-sm-6" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DisplayFor(model => model.NewAssetCount, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        </div><div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CheckedInCount, "Checked In", htmlAttributes: new { @class = "control-label col-md-6 col-sm-6" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DisplayFor(model => model.CheckedInCount, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        </div><div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CheckedOutCount, "Checked Out", htmlAttributes: new { @class = "control-label col-md-6 col-sm-6" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DisplayFor(model => model.CheckedOutCount, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Vendor</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VendorCount, "Total Vendor", htmlAttributes: new {@class = "control-label col-md-6 col-sm-6"})
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DisplayFor(model => model.VendorCount, new {@class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastRegisteredVendor, "Last Registered Vendor", htmlAttributes: new { @class = "control-label col-md-6 col-sm-6" })
+                            <div class="col-md-6 col-sm-6">
+                                @Html.DisplayFor(model => model.LastRegisteredVendor, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

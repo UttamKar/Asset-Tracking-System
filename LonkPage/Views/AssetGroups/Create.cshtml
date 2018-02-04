@@ -1,0 +1,88 @@
+﻿@model ATS.Models.Models.ViewModel.AssetGroup.AssetGroupCreateVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asset Group</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AssetTypeId, "Asset Type", htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.DropDownListFor(m => m.AssetTypeId, new SelectList(Model.AssetTypeLookup, "Value", "Text"), new { id="assetTypeAssetGroup", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.AssetTypeId, "", new {  @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.Name, new { id = "nameAssetGroup", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { id = "assetGroupNameExistenceCheck", @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.ShortName, new { id = "shortNameAssetGroup", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Code, htmlAttributes: new {@class = "col-md-4 col-sm-4 control-label"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.Code, new {id = "codeAssetGroup", @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.Code, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <hr />
+                            <!-- Button -->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="form-group">
+                                    <div class="col-md-8 col-sm-8" align="right">
+                                        <input type="submit" id="Save" name="Save" class="btn btn-success" value="Save" />
+                                        @Html.ActionLink("Search", "Search", "AssetGroups", new { @class = "btn btn-info" })
+                                        @Html.ActionLink("Cancel", "Create", "AssetGroups", new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <div>
+                                @Html.ActionLink("Back to Asset Group List", "Index")
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!--Form End-->
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+<script src="~/Scripts/ATS/DD.js"></script>
+<script src="~/Scripts/ATS/ShortCodeGeneration.js"></script>
+<script src="~/Scripts/ATS/ExistenceChecking.js"></script>
+}

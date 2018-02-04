@@ -1,0 +1,75 @@
+﻿@model ATS.Models.Models.ViewModel.PartialView.FinanceCreateVm
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading" style="background-color: lightgreen">
+        <h3 class="panel-title">Finance</h3>
+    </div>
+    <div class="panel-body">
+        <!--Form Start-->
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m=>m.Id)
+            <div class="col-md-12 col-sm-12 ">
+                <fieldset>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <!-- Form Name -->
+                    <!-- Text input-->
+
+
+                    <div class="col-md-6 col-md-offset-3">
+                        <div id="successMessageFinance" class="text-center"></div>
+                    </div><br /><br />
+                   
+                    <div class="row">
+                        <!-- row start-->
+                        <div class="col-md-10 col-md-offset-1 form-group">
+                            @Html.LabelFor(model => model.VendorId, "Vendor", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.DropDownList("VendorId", new SelectList(Model.VendorLookUp, "Value", "Text"), htmlAttributes: new {@class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.VendorId, "", new {@class = "text-danger"})
+                            </div>
+
+                            @Html.LabelFor(model => model.PurchasePrice, "Purchase Price", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.TextBoxFor(model => model.PurchasePrice,"", new { @class = "form-control", @placeholder = "Purchase Price" })
+                                @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div><!-- row end-->
+
+
+                    <div class="row">
+                        <!-- row start-->
+                        <div class="col-md-10 col-md-offset-1 form-group">
+                            @Html.LabelFor(model => model.PONo,"P/O No", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.TextBoxFor(model => model.PONo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.PurchaseDate, "Purchase Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4 col-sm-4">
+                                @Html.TextBox("PurchaseDate","", new { @class = "form-control", @placeholder = "Select Purchase Date" })
+                                @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div><!-- row end-->
+
+                    <hr/>
+                    <div class="row">
+                        <!-- row start-->
+                        <div class="col-md-offset-9 col-md-3 col-sm-offset-9 col-sm-3">
+                            <input type="button" value="Save" id="saveButtonFinance" name="saveButtonFinance" class="btn btn-success"/>
+                            <input type="button" value="Cancel" id="cancelButtonFinance" name="cancelButtonFinance" class="btn btn-danger"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        }
+        <!--Form End-->
+    </div>
+</div>
+
+
+

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.CheckOut>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">Check Out List</div>
+        <div class="panel-body">
+            <div align="right">
+                @Html.ActionLink("Create New", "Create", "CheckOuts", new { @class = "btn btn-success" })
+            </div>
+            <hr />
+            <div>
+                <table class="table table-striped table-hover table-bordered text-center">
+                    <tr style="background-color: lightgreen; color: white">
+                        <th>#</th>
+                        <th>
+                            Employee Name
+                        </th>
+                        <th>
+                            Employee No
+                        </th>
+                        <th>
+                            Entry Date
+                        </th>
+                        <th>
+                            Due Date
+                        </th>
+                        @*<th>
+                            CheckOut For
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.Comments)
+                        </th>
+                        @*<th>
+                            Location
+                        </th>*@
+                        <th>Action</th>
+                    </tr>
+                    @{
+                        var serialNo = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(++serialNo)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                                @Html.DisplayFor(modelItem => item.Employee.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EntryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DueDate)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.CheckOutFor)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comments)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.LocationId)
+                            </td>*@
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "CheckOuts", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Details", "Details", "CheckOuts", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                @Html.ActionLink("Delete", "Delete", "CheckOuts", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

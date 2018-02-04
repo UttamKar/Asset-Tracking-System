@@ -1,0 +1,72 @@
+﻿@model ATS.Models.Models.EntityModel.CheckIn
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2 class="text-center">CheckIn Details</h2><hr />
+
+
+<div class="container-fluid">
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Check Out</div>
+            <div class="panel-body">
+                <h3><b>Asset No: @Model.CheckOutAssetList.AssetNo</b></h3>
+                <hr />
+
+                <div>
+                    <dl class="dl-horizontal">
+                        
+                        <dt>
+                            Comments
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Comments)
+                        </dd>
+
+                        <dt>
+                            Location
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SetLocation)
+                        </dd>
+
+                        <dt>
+                            CheckIn Status
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CheckInStatus)
+                        </dd>
+
+                        <dt>
+                            EmployeeId
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EmployeeId)
+                        </dd>
+
+
+                    </dl>
+                    <hr />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            @Html.ActionLink("Edit", "Edit", "CheckIns", new { id = Model.Id }, new { @class = "btn btn-success" }) |
+                            @Html.ActionLink("Back to CheckIn List", "Index")
+                        </div>
+                    }
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

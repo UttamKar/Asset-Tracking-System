@@ -1,0 +1,170 @@
+﻿@using System.Web.UI.WebControls
+@model ATS.Models.Models.ViewModel.Employee.EmployeeCreateVm
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Employee</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm("Create", "Employees", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-12 col-sm-12 ">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.Branch.OrganizationId, "Organization", htmlAttributes: new { @class = "control-label col-md-2 col-sm-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.OrganizationLookUp, "Value", "Text"), new { id = "OrganizationAssetEntry", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Branch.OrganizationId, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.BranchId, "Branch", new { @class = "control-label col-md-2 col-sm-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.BranchLookUp, "Value", "Text"), new { id = "BranchAssetEntry", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.FirstName, new { id= "firstNameEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.LastName, new { id = "lastNameEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.ContactNo, new { id="contactNoEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { id= "contactNoEmployeeExistenceCheck", @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.Department, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.Designation, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.Code, new { id="codeEmployee", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4 col-sm-4">
+                                        <input type="file" name="Image" id="sizeCheck" accept=".jpg,.jpeg,.png" onchange="readURL(this)"/><br/>
+                                        <img id="showImage" src="#" class="img-thumbnail"/>
+                                        @*<input type="file" name="Image" accept="image/*" />*@
+                                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            <hr />
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="form-group">
+                                    <div class="col-md-11 col-sm-11" align="right">
+                                        <input type="submit" id="employeeSave" name="Save" class="btn btn-success" value="Save" />
+                                        @Html.ActionLink("Search", "Search", "Employees", new { @class = "btn btn-info" })
+                                        @Html.ActionLink("Cancel", "Create", "Employees", new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+                            <div>
+                                @Html.ActionLink("Back to Employee List", "Index")
+                            </div>
+
+                        </fieldset>
+                    </div>
+                }
+                <!--Form End-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $("#BranchAssetEntry").empty();
+
+        //To show image
+        $('#showImage').hide();
+
+        function readURL(input) {
+                if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#showImage')
+                        .attr('src', e.target.result)
+                        .width(100).height(100).show();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script src="~/Scripts/ATS/DD.js"></script>
+    <script src="~/Scripts/ATS/ShortCodeGeneration.js"></script>
+    <script src="~/Scripts/ATS/ExistenceChecking.js"></script>
+}

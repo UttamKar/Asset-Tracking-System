@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.Organization>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">Organization List</div>
+        <div class="panel-body">
+            <div align="right">
+                @Html.ActionLink("Create New", "Create", "Organizations", new { @class = "btn btn-success" })
+            </div>
+            <hr />
+            <div>
+                <table class="table table-striped table-hover table-bordered text-center">
+                    <tr style="background-color: lightgreen; color: white">
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShortName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    @{
+                        var serialNo = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(++serialNo)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShortName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Organizations", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Details", "Details", "Organizations", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                @Html.ActionLink("Delete", "Delete", "Organizations", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,74 @@
+﻿@model ATS.Models.Models.ViewModel.Organization.OrganizationEditVm
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Organization</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="form-horizontal">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.Name, new { id = "organizationName", @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { id = "organizationNameExistenceCheck", @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.ShortName, new { @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Location, htmlAttributes: new {@class = "col-md-4 col-sm-4 control-label"})
+                                <div class="col-md-4 col-sm-4">
+                                    @*@Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.TextAreaFor(model => model.Location, new {cols = 100, rows = 3, @class = "form-control", @style = "border-radius: 8px"})
+                                    @Html.ValidationMessageFor(model => model.Location, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <hr />
+                            <!-- Button -->
+                            <div class="form-group">
+                                <div class="col-md-8 col-sm-8" align="right">
+                                    <button type="submit" id="Save" name="Save" class="btn btn-success">Update</button>
+                                    @Html.ActionLink("Cancel", "Edit", "Organizations", new { @class = "btn btn-danger" })
+                                </div>
+                            </div>
+                            <div>
+                                @Html.ActionLink("Back to Organization List", "Index")
+                            </div>
+                        </fieldset>
+                    </div>
+                }
+                <!--Form End-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ATS/ExistenceChecking.js"></script>
+}

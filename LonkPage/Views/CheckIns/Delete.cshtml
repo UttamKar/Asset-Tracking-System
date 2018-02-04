@@ -1,0 +1,76 @@
+﻿@model ATS.Models.Models.EntityModel.CheckIn
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h2 class="text-center">Delete</h2>
+<hr />
+
+
+<div class="container-fluid">
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">CheckIn</div>
+            <div class="panel-body">
+                <h3>Are you sure you want to <span id="span" style="color: red"><b>Delete</b></span> this permanently?</h3>
+                <hr />
+
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Comments)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Comments)
+                        </dd>
+
+                        <dt>
+                            Location
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SetLocation)
+                        </dd>
+
+                        <dt>
+                            CheckIn Status
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CheckInStatus)
+                        </dd>
+
+                        <dt>
+                            EmployeeId
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EmployeeId)
+                        </dd>
+
+                    </dl>
+                    <hr />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-danger" /> |
+                            @Html.ActionLink("Back to CheckIn List", "Index")
+                        </div>
+                    }<br />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/ATS/Animation.js"></script>
+}

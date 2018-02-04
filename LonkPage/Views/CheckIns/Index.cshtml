@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.CheckIn>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">CheckIn List</div>
+        <div class="panel-body">
+            <div align="right">
+                @Html.ActionLink("Create New", "Create", "CheckIns", new { @class = "btn btn-success" })
+            </div>
+            <hr />
+            <div>
+                <table class="table table-striped table-hover table-bordered text-center">
+                    <tr style="background-color: lightgreen; color: white">
+                        <th>#</th>
+                        <th>
+                            Comments
+                        </th>
+                        <th>
+                            Location
+                        </th>
+                        <th>
+                            CheckIn Status
+                        </th>
+                        <th>
+                            EmployeeId
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    @{
+                        var serialNo = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(++serialNo)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comments)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SetLocation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CheckInStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeId)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "CheckIns", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Details", "Details", "CheckIns", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                @Html.ActionLink("Delete", "Delete", "CheckIns", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

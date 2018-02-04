@@ -1,0 +1,146 @@
+﻿@model ATS.Models.Models.ViewModel.AssetGroup.AssetGroupSearchVm
+@{
+    ViewBag.Title = "Search";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asset Group Search</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AssetTypeId, "Asset Type", htmlAttributes: new { @class = "col-md-3 col-sm-3 control-label" })
+                                <div class="col-md-3 col-sm-3">
+                                    @Html.DropDownListFor(m => m.AssetTypeId, new SelectList(Model.AssetTypeLookup, "Value", "Text"), new {id = "assetTypeAssetGroup", @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.AssetTypeId, "", new {@class = "text-danger"})
+                                </div>
+
+                                @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "col-md-2 col-sm-2 control-label" })
+                                <div class="col-md-3 col-sm-3">
+                                    @Html.TextBoxFor(model => model.Code, new { id = "codeAssetGroup", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-3 col-sm-3 control-label" })
+                                <div class="col-md-3 col-sm-3">
+                                    @Html.TextBoxFor(model => model.Name, new {id = "nameAssetGroup", @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                                </div>
+
+                                @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "col-md-2 col-sm-2 control-label" })
+                                <div class="col-md-3 col-sm-3">
+                                    @Html.TextBoxFor(model => model.ShortName, new { id = "shortNameAssetGroup", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <hr />
+                            <!-- Button -->
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="form-group">
+                                    <div class="col-md-11 col-sm-11" align="right">
+                                        <input type="submit" id="Search" name="Search" class="btn btn-info" value="Search" />
+                                        @Html.ActionLink("Cancel", "Search", "AssetGroups", new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <hr />
+
+
+                            <div class="container-fluid">
+                               
+                                <div class="panel panel-default">
+                                    <div class="panel panel-heading">Asset Group List</div>
+                                    <div class="panel-body">
+                                        <div align="right">
+                                            @Html.ActionLink("Show All", "Index", "AssetGroups", new { @class = "btn btn-info btn-sm" })
+                                            @Html.ActionLink("Create New", "Create", "AssetGroups", new {@class = "btn btn-success btn-sm" })
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            <table class="table table-striped table-hover table-bordered text-center">
+                                                <tr style="background-color: lightgreen; color: white">
+                                                    <th>#</th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.AssetType.Name)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Name)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.ShortName)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Code)
+                                                    </th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                @{
+                                                    var serialNo = 0;
+                                                }
+                                                @if (Model.AssetGroups != null && Model.AssetGroups.Any())
+                                                {
+
+                                                    foreach (var item in Model.AssetGroups)
+                                                    {
+                                                        <tr>
+                                                            <td>@(++serialNo)</td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AssetType.Name)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Name)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ShortName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Code)
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink("Edit", "Edit", "AssetGroups", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                                                @Html.ActionLink("Details", "Details", "AssetGroups", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                                                @Html.ActionLink("Delete", "Delete", "AssetGroups", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                    <!--Form End-->
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/ATS/DD.js"></script>
+}
+

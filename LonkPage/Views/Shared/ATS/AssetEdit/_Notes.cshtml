@@ -1,0 +1,49 @@
+﻿@model ATS.Models.Models.ViewModel.PartialView.NoteCreateVm
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="background-color: lightgreen">
+            <h3 class="panel-title">Notes</h3>
+        </div>
+        <div class="panel-body">
+            <!--Form Start-->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-12 col-sm-12 ">
+                    <fieldset>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <!-- Form Name -->
+                        <!-- Text input-->
+
+                        <div class="col-md-6 col-md-offset-3">
+                            <div id="successMessageNotes" class="text-center"></div>
+                        </div><br/><br/>
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 form-group">
+                                @Html.LabelFor(model => model.AssetEntryNotes, "Notes", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.AssetEntryNotes, new {@class = "form-control", @cols = "80", @rows = "4"})
+                                    @Html.ValidationMessageFor(model => model.AssetEntryNotes, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+                        @Html.HiddenFor(m => m.Id)
+
+                        <hr/>
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-11 col-sm-11" align="right">
+                                <input type="button" value="Save" id="saveButtonNotes" name="saveButtonNotes" class="btn btn-success" />
+                                <input type="button" value="Cancel" id="cancelButtonNotes" name="cancelButtonNotes" class="btn btn-danger" />
+                            </div>
+                        </div><!-- row end-->
+                    </fieldset>
+                </div>
+            }
+        </div>
+    </div>
+
+

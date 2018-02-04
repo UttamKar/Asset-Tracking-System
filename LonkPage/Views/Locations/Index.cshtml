@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.Location>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container-fluid">
+    <div class="form-horizontal">
+        <br />
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Location List</div>
+            <div class="panel-body">
+                <div align="right">
+                    @Html.ActionLink("Create New", "Create", "Locations", new { @class = "btn btn-success" })
+                </div>
+                <hr />
+                <div>
+                    <table class="table table-striped table-hover table-bordered text-center">
+                        <tr style="background-color: lightgreen; color: white">
+                            <th>#</th>
+                            <th>
+                                Organization
+                            </th>
+                            <th>
+                                Branch
+                            </th>
+                            <th>
+                                Location
+                            </th>
+                            <th>
+                                Short Name
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        @{
+                            var serialNo = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(++serialNo)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Branch.Organization.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Branch.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShortName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Locations", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                    @Html.ActionLink("Details", "Details", "Locations", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                    @Html.ActionLink("Delete", "Delete", "Locations", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+﻿@model ATS.Models.Models.ViewModel.PartialView.ServiceCreateVm
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="background-color: lightgreen">
+            <h3 class="panel-title">Service</h3>
+        </div>
+        <div class="panel-body">
+            <!--Form Start-->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                <div class="col-md-12 col-sm-12 ">
+                    <fieldset>
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                        <!-- Form Name -->
+                        <!-- Text input-->
+
+                        <div class="col-md-6 col-md-offset-3">
+                            <div id="successMessageService" class="text-center"></div>
+                        </div><br/><br/>
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.Description, "Description", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextAreaFor(model => model.Description, new {@class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+                                </div>
+
+                                @Html.LabelFor(model => model.ServiceingCost, "Serviceing Cost", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.EditorFor(model => model.ServiceingCost, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.ServiceingCost, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.ServiceDate, "Service Date", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBox("ServiceDate", "", new {@class = "form-control", @placeholder = "Select Service Date"})
+                                    @Html.ValidationMessageFor(model => model.ServiceDate, "", new {@class = "text-danger"})
+                                </div>
+
+                                @Html.LabelFor(model => model.PartsCost, "Parts Cost", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.EditorFor(model => model.PartsCost, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.PartsCost, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                @Html.LabelFor(model => model.ServiceBy, "Service By", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.EditorFor(model => model.ServiceBy, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.ServiceBy, "", new {@class = "text-danger"})
+                                </div>
+
+                                @Html.LabelFor(model => model.Tax, "Tax", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.EditorFor(model => model.Tax, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.Tax, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div><!-- row end-->
+
+                        <hr/>
+                        <div class="row">
+                            <!-- row start-->
+                            <div class="col-md-offset-9 col-md-3 col-sm-offset-9 col-sm-3">
+                                <input type="button" value="Save" id="saveButtonService" name="saveButtonService" class="btn btn-success"/>
+                                <input type="button" value="Cancel" id="cancelButtonService" name="cancelButtonService" class="btn btn-danger"/>
+                            </div>
+                        </div><!-- row end-->
+                    </fieldset>
+                </div>
+            }
+            <!--Form End-->
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="form-horizontal">
+                <hr />
+
+                <div>
+                    <table class="table table-striped table-hover table-bordered text-center">
+                        <tr style="background-color: deepskyblue; color: white">
+                            <th>#</th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Service By
+                            </th>
+                            <th>
+                                Serviceing Date
+                            </th>
+                            <th>
+                                Serviceing Cost (tk)
+                            </th>
+                            <th>
+                                Parts Cost (tk)
+                            </th>
+                            <th>
+                                Tax (tk)
+                            </th>
+                        </tr>
+                        @{
+                            var serialNo = 0;
+                        }
+                        @if (Model.Services != null && Model.Services.Any())
+                        {
+
+                            foreach (var item in Model.Services)
+                            {
+                                <tr>
+                                    <td>@(++serialNo)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ServiceBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ServiceDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ServiceingCost)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PartsCost)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Tax)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+

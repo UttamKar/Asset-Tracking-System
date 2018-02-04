@@ -1,0 +1,137 @@
+﻿@model ATS.Models.Models.EntityModel.AssetEntry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2 class="text-center">Asset Details</h2><hr />
+
+
+<div class="container-fluid">
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Asset</div>
+            <div class="panel-body">
+                <h3><b>Serial No.: @Model.SerialNo</b></h3>
+                <hr />
+
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Brand)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Brand)
+                        </dd>
+
+                        <dt>
+                            Serial No
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SerialNo)
+                        </dd>
+
+                        <dt>
+                            Description/Name
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DescriptionName)
+                        </dd>
+
+                        <dt>
+                            Asset Model
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AssetModel.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Attachment)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Attachment)
+                        </dd>
+
+                        <dt>
+                            Location
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Location.Name)
+                        </dd>
+
+                        <dt>
+                            Branch
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Location.Branch.Name)
+                        </dd>
+
+                        <dt>
+                            Organization
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Location.Branch.Organization.Name)
+                        </dd>
+
+                        <dt>
+                            Manufacturer
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AssetModel.Manufacturer.Name)
+                        </dd>
+
+                        <dt>
+                            Asset Group
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AssetModel.Manufacturer.AssetGroup.Name)
+                        </dd>
+
+                        <dt>
+                            Asset Type
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AssetModel.Manufacturer.AssetGroup.AssetType.Name)
+                        </dd>
+
+                    </dl>
+                    <hr />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            @Html.ActionLink("Edit", "Edit", "AssetEntries", new { id = Model.Id }, new { @class = "btn btn-success" }) |
+                            @Html.ActionLink("Back to Asset List", "Index")
+                        </div>
+                    }
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

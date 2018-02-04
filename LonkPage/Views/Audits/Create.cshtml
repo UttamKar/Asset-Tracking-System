@@ -1,0 +1,158 @@
+﻿@model ATS.Models.Models.ViewModel.Audit.AuditCreateVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asset Audit</h3>
+            </div>
+            <div class="panel-body">
+                <br />
+
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="col-md-12">
+                                <div class="row">
+                                    @*@Html.HiddenFor(m => m.assetIDArr)*@
+                                    <!-- row start-->
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.LocationId, "Location", htmlAttributes: new { @class = "control-label col-md-4" })
+                                        <div class="col-md-4 col-sm-4">
+                                            @Html.DropDownList("LocationId", new SelectList(Model.LocationLookUp, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                </div><!-- row end-->
+                            </div>
+
+
+                            <div>
+                                <table class="table table-striped table-hover table-bordered table-responsive text-center">
+                                    <thead>
+                                        <tr style="background-color: lightgreen; color: white;">
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">
+                                                Asset No
+                                            </th>
+                                            <th class="text-center">
+                                                Description / Name
+                                            </th>
+                                            <th class="text-center">
+                                                Custodian
+                                            </th>
+                                            <th class="text-center">
+                                                Checked
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="AuditTable"></tbody>
+                                </table>
+                            </div>
+
+
+                            <div>
+                                @Html.ActionLink("Back to Audit List", "Index")
+                            </div>
+                        </fieldset>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            @*<button class="btn btn-primary btn-sm pull-right" data-target="#auditModal" data-toggle="modal">Audit</button>*@
+            <div class="modal fade" tabindex="-1" id="auditModal" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="Close"data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Audit</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="modalForm">
+                                <div id="successMessage" class="text-center"></div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.AssetOk) Is Asset Ok?
+                                            @Html.ValidationMessageFor(model => model.AssetOk, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.AssetOnLocation) Is Asset On Location?
+                                            @Html.ValidationMessageFor(model => model.AssetOnLocation, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.AssetUnderCustodian) Is Asset Under Custodian?
+                                            @Html.ValidationMessageFor(model => model.AssetUnderCustodian, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @Html.HiddenFor(model=>model.AssetEntryId)
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Comment, htmlAttributes: new {@class = "control-label col-md-5"})
+                                        <div class="col-md-7">
+                                            @Html.TextAreaFor(model => model.Comment, new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.Comment, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AuditDate, "Audit Date", htmlAttributes: new {@class = "control-label col-md-5"})
+                                        <div class="col-md-7">
+                                            @Html.TextBoxFor(model => model.AuditDate, @DateTime.Now.ToShortDateString(), new {@readonly = "readonly", @class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.AuditDate, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" id="Save" name="Save" class="btn btn-success" value="Save" />
+                            <button type="button" id="Close" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/ATS/Audit.js"></script>
+}
+

@@ -1,0 +1,145 @@
+﻿@model ATS.Models.Models.ViewModel.Vendor.VendorSearchVm
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Vendor Search</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-12 col-sm-12 ">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <!-- Form Name -->
+                            <!-- Text input-->
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-2 col-sm-2 control-label" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.Name, new { id = "vendorName", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { id = "vendorNameExistenceCheck", @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-2 col-sm-2 control-label" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                            </div><!-- row end-->
+
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="col-md-10 col-md-offset-1 form-group">
+                                    @Html.LabelFor(model => model.ShortName, "Short Name", htmlAttributes: new { @class = "col-md-2 col-sm-2 control-label" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.ShortName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @Html.LabelFor(model => model.ContactNo, "Contact No.", htmlAttributes: new { @class = "col-md-2 col-sm-2 control-label" })
+                                    <div class="col-md-4 col-sm-4">
+                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <hr />
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-1" align="right">
+                                        <input type="submit" id="Search" name="Search" class="btn btn-info" value="Search" />
+                                        @Html.ActionLink(" Cancel", "Search", "Vendors", new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+
+                            <div class="container-fluid">
+                                <div class="form-horizontal">
+                                    <br />
+                                    <div class="panel panel-default">
+                                        <div class="panel panel-heading">Vendor List</div>
+                                        <div class="panel-body">
+                                            <div align="right">
+                                                @Html.ActionLink("Show All", "Index", "Vendors", new { @class = "btn btn-info btn-sm" })
+                                                @Html.ActionLink("Create New", "Create", "Vendors", new { @class = "btn btn-success btn-sm" })
+                                            </div>
+                                            <hr />
+
+                                            <div>
+                                                <table class="table table-striped table-hover table-bordered text-center" id="example">
+                                                    <tr style="background-color: lightgreen; color: white">
+                                                        <th>#</th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Name)
+                                                        </th>
+                                                        <th>
+                                                            Short Name
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Email)
+                                                        </th>
+                                                        <th>
+                                                            Contact No
+                                                        </th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    @{
+                                                        var serialNo = 0;
+                                                    }
+                                                    @if (Model.Vendors != null && Model.Vendors.Any())
+                                                    {
+
+                                                        foreach (var item in Model.Vendors)
+                                                        {
+                                                            <tr>
+                                                                <td>@(++serialNo)</td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ShortName)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Email)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ContactNo)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.ActionLink("Edit", "Edit", "Vendors", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                                                    @Html.ActionLink("Details", "Details", "Vendors", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                                                    @Html.ActionLink("Delete", "Delete", "Vendors", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                }
+                <!--Form End-->
+
+            </div>
+        </div>
+    </div>
+</div>

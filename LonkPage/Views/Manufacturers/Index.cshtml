@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ATS.Models.Models.EntityModel.Manufacturer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="container-fluid">
+    <div class="form-horizontal">
+        <br />
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Manufacturer List</div>
+            <div class="panel-body">
+                <div align="right">
+                    @Html.ActionLink("Search", "Search", "Manufacturers", new { @class = "btn btn-info" })
+                    @Html.ActionLink("Create New", "Create", "Manufacturers", new {@class = "btn btn-success"})
+                </div>
+                <hr />
+                <div>
+                    <table class="table table-striped table-hover table-bordered text-center">
+                        <tr style="background-color: lightgreen; color: white">
+                            <th>#</th>
+                            <th>
+                                Asset Group
+                            </th>
+                            <th>
+                                Manufacturer Name
+                            </th>
+                            <th>
+                                Short Name
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Code)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        @{
+                            var serialNo = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(++serialNo)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssetGroup.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShortName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Code)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Manufacturers", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                                    @Html.ActionLink("Details", "Details", "Manufacturers", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                                    @Html.ActionLink("Delete", "Delete", "Manufacturers", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

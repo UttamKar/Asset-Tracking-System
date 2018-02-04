@@ -1,0 +1,83 @@
+﻿@model ATS.Models.Models.ViewModel.AssetType.AssetTypeEditVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asset Type</h3>
+            </div>
+            <div class="panel-body">
+                <!--Form Start-->
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="form-horizontal">
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name,"Asset Type", htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.Name, new { id = "assetTypeName", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { id = "assetTypeNameExistenceCheck", @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "col-md-4 col-sm-4 control-label" })
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.ShortName, new { id = "assetTypeShortName", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Code, htmlAttributes: new {@class = "col-md-4 col-sm-4 control-label"})
+                                <div class="col-md-4 col-sm-4">
+                                    @Html.TextBoxFor(model => model.Code, new {id = "assetTypeAutoCode", @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.Code, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <!-- row start-->
+                                <div class="form-group">
+                                    <div class="col-md-8 col-sm-8" align="right">
+                                        <input type="submit" id="Save" name="Save" class="btn btn-success" value="Update" />
+                                        @Html.ActionLink("Cancel", "Edit", "AssetTypes", new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div><!-- row end-->
+
+                            <div>
+                                @Html.ActionLink("Back to Asset Type List", "Index")
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!--Form End-->
+
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/ATS/DD.js"></script>
+<script src="~/Scripts/ATS/ShortCodeGeneration.js"></script>
+<script src="~/Scripts/ATS/ExistenceChecking.js"></script>
+}
+
+
+

@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "AssetAudit";
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">AssetAudit</h3>
+            </div>
+            <div class="panel-body">
+
+
+
+
+                <form id="form1">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <!-- row start-->
+                            <!-- row start-->
+                            <div class="col-md-10 col-md-offset-1 form-group">
+                                <button id="Save" name="Save" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"></span> Search</button>
+                                <label class="col-md-2 col-sm-2 control-label" for="name">Search By Category</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <select id="searchDropdown" name="searchDropdown" data-live-search="true" data-live-search-style="startsWith" class="selectpicker form-control">
+                                        <option>---Select---</option>
+                                        <option>Employee</option>
+                                        <option>Location</option>
+                                    </select>
+
+
+                                </div>
+
+
+                                <div id="searchSpan"></div>
+
+                            </div>
+
+
+                            @*For Partial*@
+
+
+                        </div><!-- row end-->
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <table id="example" class="display" cellspacing="0" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Organization</th>
+                                        <th>Branch</th>
+                                        <th>Employee</th>
+                                        <th>Asset</th>
+                                        <th>CheckAction</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>BITM</td>
+                                        <td>CTG </td>
+                                        <td>Md.Imran</td>
+                                        <td>Laptop</td>
+                                        <td><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-list"></span></button></td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>BITM</td>
+                                        <td>CTG </td>
+                                        <td>Md.Imran</td>
+                                        <td>Laptop</td>
+                                        <td><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-list"></span></button></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+                    <br /><br /><br />
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script src="~/Scripts/ATS/CheckIn.js"></script>
+
+
+    <script type="text/javascript">
+                        $(function () {
+                            $("#chkAll").click(function () {
+                                $("input[name='employees']").attr("checked", this.checked);
+                            });
+                            $('#example').DataTable({
+                            });
+                        });
+    </script>
+}
+
